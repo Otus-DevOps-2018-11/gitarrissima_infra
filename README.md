@@ -2,8 +2,8 @@
 gitarrissima Infra repository
 
 
-testapp_IP = 35.210.223.91
-testapp_port = 15518
+testapp_IP = 35.195.199.207
+testapp_port = 9292
 
 
 В качестве доп. задания используйте созданные ранее скрипты
