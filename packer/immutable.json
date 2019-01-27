@@ -1,0 +1,28 @@
+{
+    "variables": {
+        "machine_type": "f1-micro",
+        "project_id": "infra-227420",
+        "source_image_family": "reddit-base"
+    },
+
+    "builders": [
+        {
+            "image_family": "reddit-full",
+            "image_name": "reddit-full-{{timestamp}}",
+            "machine_type": "{{user `machine_type`}}",
+            "project_id": "{{user `project_id`}}",
+            "source_image_family": "{{user `source_image_family`}}",
+            "ssh_username": "appuser",
+            "type": "googlecompute",
+            "zone": "europe-west1-b"
+        }
+    ],
+    "provisioners": [
+        {
+            "execute_command": "sudo {{.Path}}",
+            "script": "scripts/deploy.sh",
+            "type": "shell"
+        }
+    ]
+}
+
