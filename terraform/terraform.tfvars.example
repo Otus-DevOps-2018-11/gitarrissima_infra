@@ -1,0 +1,4 @@
+project = "infra-227420"
+public_key_path = "~/.ssh/test.pub"
+private_key_path = "~/.ssh/test"
+disk_image = "reddit-base"
