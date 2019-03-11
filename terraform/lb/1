@@ -1,0 +1,75 @@
+provider "google" {
+  version = "1.4.0"
+  project = "infra-227420"
+  region  = "europe-west1"
+}
+
+resource "google_compute_instance_template" "test" {
+  name        = "appserver-template"
+  description = "This template is used to create app server instances."
+
+  machine_type = "g1-small"
+  disk {
+    source_image = "${var.disk_image}"
+    auto_delete  = true
+    boot         = true
+  }
+
+  network_interface {
+    network       = "default"
+    access_config = {}
+  }
+
+
+  tags = ["reddit-app"]
+
+}
+
+resource "google_compute_instance_group_manager" "appserver" {
+  name = "appserver-igm"
+
+  base_instance_name = "app"
+  instance_template  = "${google_compute_instance_template.test.self_link}"
+  update_strategy    = "NONE"
+  zone               = "europe-west1-b"
+
+
+  target_size = 1
+  named_port {
+    name = "custom-http"
+    port = 9292
+  }
+
+}
+
+resource "google_compute_backend_service" "website" {
+  name        = "my-backend"
+  description = "Our company website"
+  port_name   = "custom-http"
+  region  = "europe-west1"
+  protocol    = "HTTP"
+  timeout_sec = 10
+  enable_cdn  = false
+
+  backend {
+    group = "${google_compute_instance_group_manager.appserver.instance_group}"
+  }
+
+  health_checks = ["${google_compute_http_health_check.default.self_link}"]
+}
+
+resource "google_compute_http_health_check" "default" {
+  name               = "test"
+  request_path       = "/"
+  check_interval_sec = 1
+  timeout_sec        = 1
+}
+
+resource "google_compute_forwarding_rule" "my-forwarding-rule" {
+  name = "forwarding-rule-us-east1"
+  region  = "global"
+  load_balancing_scheme = "EXTERNAL"
+  backend_service = "${google_compute_backend_service.website.self_link}"
+  ports = [ "80" ]
+}
+
