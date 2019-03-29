@@ -13,9 +13,9 @@
     ],
     "provisioners": [
         {
-            "execute_command": "sudo {{.Path}}",
-            "script": "scripts/install_ruby.sh",
-            "type": "shell"
+            "user": "test",
+            "playbook_file": "ansible/packer_app.yml",
+            "type": "ansible"
         }
     ]
 }

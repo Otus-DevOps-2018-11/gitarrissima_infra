@@ -28,20 +28,6 @@ nat_ip = "${google_compute_address.app_ip.address}"
     private_key = "${file(var.private_key_path)}"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "echo \"DATABASE_URL=${var.mongodb}:27017\" | sudo tee -a /etc/environment",
-    ]
-  }
-
-  provisioner "file" {
-    source      = "${var.source_files}/puma.service"
-    destination = "/tmp/puma.service"
-  }
-
-  provisioner "remote-exec" {
-    script = "${var.source_files}/deploy.sh"
-  }
 
 }
 
