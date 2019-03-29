@@ -1,4 +1,5 @@
 project = "infra-227420"
+private_key_path_test = "test"
 public_key_path = "test.pub"
 public_key_path_test = "test.pub"
 public_key_path_test2 = "test.pub"
