@@ -12,7 +12,7 @@ variable zone {
   default     = "europe-west1-b"
 }
 
-variable private_key_path {
+variable private_key_path_test {
   description = "Path to private key"
 }
 
@@ -41,3 +41,10 @@ variable db_disk_image {
   description = "Disk image for reddit db"
   default     = "reddit-db-base"
 }
+
+variable mongodb {
+  description = "Mongodb address"
+  default     = "127.0.0.1:27017"
+}
+
+
