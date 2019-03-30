@@ -1,0 +1,21 @@
+{
+    "builders": [
+        {
+            "image_family": "reddit-db-base",
+            "image_name": "reddit-db-base-{{timestamp}}",
+            "machine_type": "f1-micro",
+            "project_id": "infra-227420",
+            "source_image_family": "ubuntu-1604-lts",
+            "ssh_username": "test",
+            "type": "googlecompute",
+            "zone": "europe-west1-b"
+        }
+    ],
+    "provisioners": [
+        {
+	    "user": "test",
+            "playbook_file": "ansible/playbooks/packer_db.yml",
+            "type": "ansible"
+        }
+    ]
+}
