@@ -12,9 +12,9 @@ resource "google_compute_instance" "app" {
 
   network_interface {
     network = "default"
-access_config = {
-nat_ip = "${google_compute_address.app_ip.address}"
-}
+    access_config = {
+      nat_ip = "${google_compute_address.app_ip.address}"
+    }
   }
 
   metadata {
@@ -27,8 +27,6 @@ nat_ip = "${google_compute_address.app_ip.address}"
     agent       = false
     private_key = "${file(var.private_key_path)}"
   }
-
-
 }
 
 resource "google_compute_address" "app_ip" {
@@ -55,9 +53,9 @@ resource "google_compute_firewall" "firewall_80" {
   allow {
     protocol = "tcp"
     ports = ["80"]
+
   }
 
   source_ranges = ["0.0.0.0/0"]
   target_tags   = ["reddit-app"]
 }
-

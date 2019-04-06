@@ -13,7 +13,7 @@
     ],
     "provisioners": [
         {
-	    "user": "test",
+	          "user": "test",
             "playbook_file": "ansible/playbooks/packer_db.yml",
             "type": "ansible"
         }
