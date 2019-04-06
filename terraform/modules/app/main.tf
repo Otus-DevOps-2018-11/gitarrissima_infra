@@ -43,6 +43,7 @@ nat_ip = "${google_compute_address.app_ip.address}"
     script = "${var.source_files}/deploy.sh"
   }
 
+
 }
 
 resource "google_compute_address" "app_ip" {
