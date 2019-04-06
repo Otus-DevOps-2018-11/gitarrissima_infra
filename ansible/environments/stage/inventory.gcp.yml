@@ -1,0 +1,10 @@
+plugin: gcp_compute
+projects:
+  - infra-227420
+filters:
+groups:
+  app: "'reddit-app' == name"
+  db: "'reddit-db' == name"
+service_account_file: ./service_account.json
+auth_kind: serviceaccount
+
