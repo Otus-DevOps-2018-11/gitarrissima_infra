@@ -4,7 +4,7 @@
             "image_family": "reddit-db-base",
             "image_name": "reddit-db-base-{{timestamp}}",
             "machine_type": "f1-micro",
-            "project_id": "infra-227420",
+            "project_id": "docker-237516",
             "source_image_family": "ubuntu-1604-lts",
             "ssh_username": "test",
             "type": "googlecompute",
@@ -13,8 +13,10 @@
     ],
     "provisioners": [
         {
-	          "user": "test",
+            "user": "test",
             "playbook_file": "ansible/playbooks/packer_db.yml",
+            "extra_arguments": ["--tags","install"],
+            "ansible_env_vars": ["ANSIBLE_ROLES_PATH={{ pwd }}/ansible/roles"],
             "type": "ansible"
         }
     ]
