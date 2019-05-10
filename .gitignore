@@ -7,4 +7,12 @@ jdauphant.nginx
 vault.key
 *.retry
 service_account.json
+# Vagrant & molecule
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache
+
 
